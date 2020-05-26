@@ -1,8 +1,8 @@
 ## lihuang_cloud
 
 ## 资料
-https://spring.io/guides
-https://spring.io/guides/gs/serving-web-content/
-https://elasticsearch.cn/
-
+[spring 文档]{https://spring.io/guides}
+[Spring web文档]{https://spring.io/guides/gs/serving-web-content/}
+[es社区]{https://elasticsearch.cn/}
+[github OAuth]{https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/}
 ## 工具
