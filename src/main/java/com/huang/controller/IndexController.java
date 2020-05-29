@@ -15,20 +15,23 @@ public class IndexController {
     @Autowired
     private UserMapper userMapper;
 
-    @GetMapping(value={"/"})
-    public String hello(HttpServletRequest request){
-        Cookie[] cookies=request.getCookies();
-        for (int i=0; i<cookies.length; i++){
-            if(cookies[i].getName().equals("token")){
-                String token=cookies[i].getValue();
-                User user=userMapper.findByToken(token);
-                System.out.println(user);
-                if(user!=null){
-                    request.getSession().setAttribute("user",user);
-                    break;
+    @GetMapping(value = {"/"})
+    public String hello(HttpServletRequest request) {
+        System.out.println("index");
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null && cookies.length != 0) {
+            for (int i = 0; i < cookies.length; i++) {
+                if (cookies[i].getName().equals("token")) {
+                    String token = cookies[i].getValue();
+                    User user = userMapper.findByToken(token);
+                    System.out.println(user);
+                    if (user != null) {
+                        request.getSession().setAttribute("user", user);
+                        break;
+                    }
                 }
             }
         }
-        return  "index";
+        return "index";
     }
 }

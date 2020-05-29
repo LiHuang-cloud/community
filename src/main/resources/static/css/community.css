@@ -1,0 +1,12 @@
+.main{
+    margin: 30px;
+}
+.bod{
+    background:url(../image/6.jpg) no-repeat center;
+    background-size:100% 100%;
+}
+.btn-publish{
+    float: left;
+    margin-bottom: 15px;
+}
+
