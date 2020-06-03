@@ -46,7 +46,7 @@ public class AuthorizeController {
             response.addCookie(new Cookie("token",token));
             return "redirect:/";
         }else{
-            return "redirect:index";
+            return "redirect:/";
             //登陆失败,重新登陆
         }
     }
