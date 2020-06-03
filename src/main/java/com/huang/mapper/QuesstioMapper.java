@@ -1,6 +1,5 @@
 package com.huang.mapper;
 
-import com.huang.dto.QuestionDTO;
 import com.huang.model.Question;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;

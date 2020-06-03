@@ -30,6 +30,7 @@ public class IndexController {
     public String hello(HttpServletRequest request, Model model) {
         System.out.println("index");
         Cookie[] cookies = request.getCookies();
+        System.out.println(cookies);
         if (cookies != null && cookies.length != 0) {
             for (int i = 0; i < cookies.length; i++) {
                 if (cookies[i].getName().equals("token")) {
