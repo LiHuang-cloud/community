@@ -1,5 +1,6 @@
 package com.huang.mapper;
 
+import com.huang.dto.QuestionDTO;
 import com.huang.model.Question;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -27,4 +28,10 @@ public interface QuesstioMapper {
 
     @Select("select * from question  where creator=#{param1} limit #{param2},#{param3}  ")
     List<Question> getIdfindylist(Integer id, Integer offset, Integer size);
+
+    @Select("select * from question where id=#{id}")
+    Question getById(Integer id);
+
+    @Update("update question set title=#{title},DESCRIPTION=#{description},tag=#{tag}, gmt_modified=#{gmtModified} where id=#{id}")
+    void update(Question question);
 }

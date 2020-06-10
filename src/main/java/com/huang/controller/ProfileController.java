@@ -28,27 +28,10 @@ public class ProfileController {
     public String profile(@PathVariable(name="action") String action, Model model ,HttpServletRequest request
     , @RequestParam(name = "page", defaultValue = "1") Integer page,
                           @RequestParam(name = "size", defaultValue = "5") Integer size){
-        Cookie[] cookies = request.getCookies();
-        User user=null;
-        System.out.println(cookies);
-        if (cookies != null && cookies.length != 0) {
-            for (int i = 0; i < cookies.length; i++) {
-                if (cookies[i].getName().equals("token")) {
-                    String token = cookies[i].getValue();
-                    user = userMapper.findByToken(token);
-                    System.out.println(user);
-                    if (user != null) {
-                        request.getSession().setAttribute("user", user);
-                        break;
-                    }
-                }
-            }
-        }
-
+        User user=(User)request.getSession().getAttribute( "user");
         if(user==null){
             return "redirect:/";
         }
-
         if ("questions".equals(action)) {
             model.addAttribute("section","questions");
             model.addAttribute("sectionName","我的问题");
