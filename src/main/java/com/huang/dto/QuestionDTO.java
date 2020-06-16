@@ -1,6 +1,7 @@
 package com.huang.dto;
 
-import com.huang.model.User;
+
+import com.huang.model.user;
 import lombok.Data;
 
 @Data
@@ -15,5 +16,5 @@ public class QuestionDTO {
     private Integer viewCount;
     private Integer commentCount;
     private Integer likeCount;
-    private User user;
+    private user user;
 }

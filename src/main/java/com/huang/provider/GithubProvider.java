@@ -21,7 +21,6 @@ public class GithubProvider {
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String string = response.body().string();
-            System.out.println(string);
             String[] split = string.split("&");
             return split[0];
         } catch (IOException e) {
@@ -40,6 +39,7 @@ public class GithubProvider {
             Response response = client.newCall(request).execute();
             String string = response.body().string();
             GithubUser githubUser = JSON.parseObject(string, GithubUser.class);
+            System.out.println("获取github用户的个人资料"+githubUser);
             return githubUser;
         } catch (IOException e) {
         }

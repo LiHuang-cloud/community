@@ -25,13 +25,13 @@ public class PaginationDTO {
         }
 
         //页面到前端可以自己乱传递所以判断一下
-        if(page<1){
-            page=1;
-        }else if(page>count){
-            page=count;
+        if (page < 1) {
+            page = 1;
+        } else if (page > count) {
+            page = count;
         }
 
-        this.page=page;
+        this.page = page;
         //是否展示上一页
         if (page == 1) {
             showPrevious = false;
@@ -47,15 +47,12 @@ public class PaginationDTO {
         pages.add(page);
         for (int i = 1; i <= 3; i++) {
             if (page - i > 0) {
-                pages.add(0,page - i);
+                pages.add(0, page - i);
             }
-
             if (page + i <= count) {
-                pages.add(page+i);
+                pages.add(page + i);
             }
-            System.out.println(pages);
         }
-        System.out.println(pages);
 
 
         //是否展示第一页

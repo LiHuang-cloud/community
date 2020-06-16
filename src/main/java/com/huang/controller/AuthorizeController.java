@@ -2,7 +2,8 @@ package com.huang.controller;
 
 import com.huang.dto.AccessTokenDTO;
 import com.huang.dto.GithubUser;
-import com.huang.model.User;
+
+import com.huang.model.user;
 import com.huang.provider.GithubProvider;
 import com.huang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,9 @@ public class AuthorizeController {
         accessTokenDTO.setCode(code);
         accessTokenDTO.setState(state);
         String accessToken=githubProvider.getAccessToken(accessTokenDTO);
-        System.out.println("accessToken"+accessToken);
         GithubUser githubUser = githubProvider.getUser(accessToken);
-        System.out.println("githubUser"+githubUser);
         if(githubUser!=null&&githubUser.getId()!=null){
-            User user=new User();
+            user user=new user();
             String token=UUID.randomUUID().toString();
             user.setToken(token);
             user.setName(githubUser.getName());
@@ -48,6 +47,7 @@ public class AuthorizeController {
             response.addCookie(new Cookie("token",token));
             return "redirect:/";
         }else{
+            System.out.println("错误了");
             return "redirect:/";
             //登陆失败,重新登陆
         }

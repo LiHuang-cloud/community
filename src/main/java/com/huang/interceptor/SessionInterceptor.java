@@ -1,33 +1,36 @@
 package com.huang.interceptor;
 
-import com.huang.mapper.UserMapper;
-import com.huang.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import com.huang.mapper.userMapper;
+import com.huang.model.user;
+import com.huang.model.userExample;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+
 @Service
 public class SessionInterceptor implements HandlerInterceptor {
     @Autowired
-    private UserMapper userMapper;
+    private userMapper userMapper;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Cookie[] cookies = request.getCookies();
-        System.out.println(cookies);
         if (cookies != null && cookies.length != 0) {
             for (int i = 0; i < cookies.length; i++) {
                 if (cookies[i].getName().equals("token")) {
                     String token = cookies[i].getValue();
-                    User user = userMapper.findByToken(token);
-                    System.out.println(user);
-                    if (user != null) {
-                        request.getSession().setAttribute("user", user);
+                    userExample userExample=new userExample();
+                    userExample.createCriteria().andTokenEqualTo(token);
+                    List<user> users=userMapper.selectByExample(userExample);
+                    System.out.println("users"+users.toString()+"ssss");
+                    if (users.size() !=0) {
+                        request.getSession().setAttribute("user", users.get(0));
                         break;
                     }
                 }

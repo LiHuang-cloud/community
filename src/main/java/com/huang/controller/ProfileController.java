@@ -1,8 +1,8 @@
 package com.huang.controller;
 
 import com.huang.dto.PaginationDTO;
-import com.huang.mapper.UserMapper;
-import com.huang.model.User;
+import com.huang.mapper.userMapper;
+import com.huang.model.user;
 import com.huang.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
+
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class ProfileController {
     @Autowired
-    private UserMapper userMapper;
+    private userMapper userMapper;
 
 
     @Autowired
@@ -28,7 +28,7 @@ public class ProfileController {
     public String profile(@PathVariable(name="action") String action, Model model ,HttpServletRequest request
     , @RequestParam(name = "page", defaultValue = "1") Integer page,
                           @RequestParam(name = "size", defaultValue = "5") Integer size){
-        User user=(User)request.getSession().getAttribute( "user");
+        user user=(user)request.getSession().getAttribute( "user");
         if(user==null){
             return "redirect:/";
         }

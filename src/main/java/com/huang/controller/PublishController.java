@@ -1,9 +1,8 @@
 package com.huang.controller;
 
 import com.huang.dto.QuestionDTO;
-import com.huang.mapper.QuesstioMapper;
-import com.huang.model.Question;
-import com.huang.model.User;
+import com.huang.model.question;
+import com.huang.model.user;
 import com.huang.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 public class PublishController {
 
 
-
     @Autowired
     private QuestionService questionService;
 
@@ -30,13 +28,13 @@ public class PublishController {
 
 
     @GetMapping("/publish/{id}")
-    public String edit(@PathVariable("id") Integer id,Model model){
-        if(id!=null) {
+    public String edit(@PathVariable("id") Integer id, Model model) {
+        if (id != null) {
             QuestionDTO byId = questionService.getById(id);
             model.addAttribute("title", byId.getTitle());
             model.addAttribute("description", byId.getDescription());
             model.addAttribute("tag", byId.getTag());
-            model.addAttribute("id",byId.getId());
+            model.addAttribute("id", byId.getId());
             return "/publish";
         }
         return "/";
@@ -45,10 +43,10 @@ public class PublishController {
 
     @PostMapping("/publish")
     public String doPublish(
-            @RequestParam(value = "title" ,required = false) String title,
-            @RequestParam(value = "description",required = false) String description,
-            @RequestParam(value = "tag" ,required = false) String tag,
-            @RequestParam(value = "id",required = false) Integer id,
+            @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "description", required = false) String description,
+            @RequestParam(value = "tag", required = false) String tag,
+            @RequestParam(value = "id", required = false) Integer id,
             HttpServletRequest request,
             Model model
     ) {
@@ -67,12 +65,12 @@ public class PublishController {
             model.addAttribute("error", "标题不能为空");
             return "publish";
         }
-        User user=(User)request.getSession().getAttribute( "user");
+        user user = (user) request.getSession().getAttribute("user");
         if (user == null) {
             model.addAttribute("error", "用户未登录");
             return "publish";
         }
-        Question question = new Question();
+        question question = new question();
         question.setTitle(title);
         question.setTag(tag);
         question.setDescription(description);
