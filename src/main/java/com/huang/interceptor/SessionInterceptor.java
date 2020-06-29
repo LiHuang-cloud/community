@@ -28,7 +28,6 @@ public class SessionInterceptor implements HandlerInterceptor {
                     userExample userExample=new userExample();
                     userExample.createCriteria().andTokenEqualTo(token);
                     List<user> users=userMapper.selectByExample(userExample);
-                    System.out.println("users"+users.toString()+"ssss");
                     if (users.size() !=0) {
                         request.getSession().setAttribute("user", users.get(0));
                         break;

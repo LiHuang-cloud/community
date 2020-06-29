@@ -34,7 +34,7 @@ public class UserService {
             updateuser.setGmtModified(user.getGmtModified());
             userExample userExample1=new userExample();
             userExample.createCriteria().andIdEqualTo(dbUser.getId());
-            System.out.println("userId"+updateuser.getId());
+            userMapper.updateByExampleSelective(updateuser,userExample);
             //            //更新
         }
     }

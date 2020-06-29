@@ -2,7 +2,7 @@
     margin: 30px;
 }
 .bod{
-    background:url(../image/6.jpg) no-repeat center;
+    background:url(../image/tt.png) no-repeat center;
     background-size:100% 100%;
 }
 .btn-publish{
@@ -14,7 +14,9 @@
     width:38px;
     height:38px;
 }
-
+.media-body{
+    padding-top:10px;
+}
 .text-desc{
     font-size: 12px;
     font-weight: normal;
@@ -36,4 +38,31 @@
 .community-menu{
     color: #999;
     font-size: 13px;
+    display: block;
+    margin-bottom: 15px;
+}
+.comment{
+    margin: 15px 0px;
+}
+.comments{
+    margin-bottom: 15px;
+    border-bottom: 1px solid #999999;
+    padding-bottom: 5px;
+}
+.btn-comment{
+    float: right;
+    margin-bottom: 10px;
+}
+.menu{
+    margin-top: 5px;
+    color: #999;
+}
+.menu .icon{
+    margin-right:6px;
+    font-size:15px;
+    cursor: pointer;
+}
+.menu .icon:hover
+{
+    color: #499ef3;
 }

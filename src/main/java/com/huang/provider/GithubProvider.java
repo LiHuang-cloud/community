@@ -39,9 +39,10 @@ public class GithubProvider {
             Response response = client.newCall(request).execute();
             String string = response.body().string();
             GithubUser githubUser = JSON.parseObject(string, GithubUser.class);
-            System.out.println("获取github用户的个人资料"+githubUser);
             return githubUser;
         } catch (IOException e) {
+            System.out.println("登陆时获取用户信息异常");
+            e.printStackTrace();
         }
         return null;
     }

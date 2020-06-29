@@ -4,6 +4,7 @@ import com.huang.dto.PaginationDTO;
 import com.huang.dto.QuestionDTO;
 import com.huang.exception.CustomizeErrorCode;
 import com.huang.exception.CustomizeException;
+import com.huang.mapper.questionExtMapper;
 import com.huang.mapper.questionMapper;
 import com.huang.mapper.userMapper;
 import com.huang.model.question;
@@ -21,6 +22,9 @@ import java.util.List;
 public class QuestionService {
     @Autowired
     private userMapper userMapper;
+
+    @Autowired
+    private questionExtMapper questionExtMapper;
 
     @Autowired
     private questionMapper quesstioMapper;
@@ -42,14 +46,13 @@ public class QuestionService {
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setUser(user);
-            System.out.println("questionDTO"+questionDTO);
             questionDTOS.add(questionDTO);
         }
         paginationDTO.setQuestions(questionDTOS);
         return paginationDTO;
     }
 
-    public PaginationDTO getIdfindylist(Integer id, Integer page, Integer size) {
+    public PaginationDTO getIdfindylist(Long id, Integer page, Integer size) {
         PaginationDTO paginationDTO=new PaginationDTO();
         questionExample questionExample = new questionExample();
         questionExample.createCriteria().andCreatorEqualTo(id);
@@ -76,7 +79,7 @@ public class QuestionService {
         return paginationDTO;
     }
 
-    public QuestionDTO getById(Integer id) {
+    public QuestionDTO getById(Long id) {
         question question =quesstioMapper.selectByPrimaryKey(id);
         if(question==null){
             throw  new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
@@ -90,6 +93,9 @@ public class QuestionService {
 
     public void createOrUpdate(question question) {
         if(question.getId()==null){//插入
+            question.setViewCount(0);
+            question.setCommentCount(0);
+            question.setLikeCount(0);
             quesstioMapper.insert(question);
         }else{//更新
             questionExample questionExample=new questionExample();
@@ -99,5 +105,12 @@ public class QuestionService {
                 throw  new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
         }
+    }
+
+    public void incView(Long id) {
+        question question=new question();
+        question.setId(id);
+        question.setViewCount(1);
+        questionExtMapper.incView(question);
     }
 }
